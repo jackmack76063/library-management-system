@@ -38,18 +38,20 @@ Source URL: https://www.w3schools.com/Css/css_align.asp
     margin-bottom: 10px;
 }
 
-/* Table styles */
-table {
-    width: 100%;
-    border-collapse: collapse;
+/* Table styles — removed the old custom table/th/td rules here.
+   They set a light gray header background, which clashed badly with
+   Pico's light gray text in dark mode (nearly unreadable). Pico already
+   styles tables with proper contrast, so no custom rules are needed. */
+
+/* Fix: Delete buttons are <button type="submit"> inside their own <form>
+   in each table row. Pico makes submit buttons full-width by default
+   (assuming a typical vertical form), which looked stretched and
+   inconsistent next to the normal-sized Edit buttons. This keeps them
+   sized like a normal button instead. */
+td form {
+    display: inline-block;
 }
 
-table th, table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-table th {
-    background-color: #f2f2f2;
-    text-align: left;
+td form button[type="submit"] {
+    width: auto;
 }
