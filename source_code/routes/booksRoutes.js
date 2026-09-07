@@ -1,13 +1,3 @@
- /* Citation for the following function:
-Date: 11/21/2024
-Adapted from CS 340: nodejs-starter-app (app.js)
-Majority of the code was copied from the sample code given, and modified based on individual project tables. 
-Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%200%20-%20Setting%20Up%20Node.js
-
-Updated for Postgres (Neon): callback returns (error, result) with result.rows;
-'?' placeholders became '$1, $2, ...'.
-*/
-
 const express = require('express');
 const router = express.Router();
 const db = require('../database/db-connector');  
