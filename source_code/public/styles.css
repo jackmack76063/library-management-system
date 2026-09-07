@@ -1,16 +1,3 @@
-/* 
-styles.css 
-Citation for the following function:
-Date: 11/21/2024
-Adapted from CSS Tutorial
-Majority of the code was copied from the sample code given, and modified based on individual project tables. 
-Source URL: https://www.w3schools.com/Css/css_align.asp
-*/
-
-/* Note: removed the old body { margin/padding/font-family } rule here —
-   it was overriding Pico.css's nicer default typography and spacing,
-   since this file loads after Pico in the page. */
-
 /* Home page specific styles */
 .home-background {
     /* Break out of the <main class="container"> wrapper from the layout,
@@ -54,16 +41,6 @@ Source URL: https://www.w3schools.com/Css/css_align.asp
     padding: 0 16px;
 }
 
-/* Table styles — removed the old custom table/th/td rules here.
-   They set a light gray header background, which clashed badly with
-   Pico's light gray text in dark mode (nearly unreadable). Pico already
-   styles tables with proper contrast, so no custom rules are needed. */
-
-/* Fix: Delete buttons are <button type="submit"> inside their own <form>
-   in each table row. Pico makes submit buttons full-width by default
-   (assuming a typical vertical form), which looked stretched and
-   inconsistent next to the normal-sized Edit buttons. This keeps them
-   sized like a normal button instead. */
 td form {
     display: inline-block;
 }
