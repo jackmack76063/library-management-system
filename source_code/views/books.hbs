@@ -1,0 +1,57 @@
+<!-- index.hbs -->
+{{!-- Citation for the following function:
+Date: 11/21/2024
+Adapted from CS 340: nodejs-starter-app (index.hbs)
+Majority of the code was copied from the sample code given, and modified based on individual project tables. 
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%200%20-%20Setting%20Up%20Node.js --}} 
+<h1>Books</h1>
+<link rel="stylesheet" href="/styles.css">
+<div class="topnav" id="librariesTopnav">
+  <a href="/"><button type="button">Home</button></a>
+  <a href="/libraries"><button type="button">Libraries</button></a>
+  <a href="/books"><button type="button">Books</button></a>
+  <a href="/borrowers"><button type="button">Borrowers</button></a>
+  <a href="/checkouts"><button type="button">Checkouts</button></a>
+  <a href="/booksBorrowers"><button type="button">Books Borrowers</button></a>
+  <a href="/staff"><button type="button">Staff</button></a>
+</div>
+
+
+<!-- Display all books -->
+<table border="1">
+    <thead>
+        <tr>
+            <th>Book ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Library Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.bookID}}</td>
+            <td>{{this.bookTitle}}</td>
+            <td>{{this.bookAuthor}}</td>
+            <td>{{this.bookGenre}}</td>
+            <td>{{this.libraryName}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<!-- Add a new book -->
+<h3>Add New Book</h3>
+<form action="/books/add" method="POST">
+    <label>Title: </label><input type="text" name="bookTitle"><br>
+    <label>Author: </label><input type="text" name="bookAuthor"><br>
+    <label>Genre: </label><input type="text" name="bookGenre"><br>
+    <label>Library ID: </label>
+    <select name="librariesLibraryID">
+        {{#each libraries}}
+            <option value="{{this.libraryID}}">{{this.libraryName}}</option>
+        {{/each}}
+    </select><br>
+    <button type="submit">Add Book</button>
+</form>

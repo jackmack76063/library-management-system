@@ -1,0 +1,53 @@
+<!-- index.hbs -->
+{{!-- Citation for the following function:
+Date: 11/21/2024
+Adapted from CS 340: nodejs-starter-app (index.hbs)
+Majority of the code was copied from the sample code given, and modified based on individual project tables. 
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%200%20-%20Setting%20Up%20Node.js --}} 
+
+<h1>Borrowers</h1>
+
+<link rel="stylesheet" href="/styles.css">
+<div class="topnav" id="librariesTopnav">
+  <a href="/"><button type="button">Home</button></a>
+  <a href="/libraries"><button type="button">Libraries</button></a>
+  <a href="/books"><button type="button">Books</button></a>
+  <a href="/borrowers"><button type="button">Borrowers</button></a>
+  <a href="/checkouts"><button type="button">Checkouts</button></a>
+  <a href="/booksBorrowers"><button type="button">Books Borrowers</button></a>
+  <a href="/staff"><button type="button">Staff</button></a>
+</div>
+
+<!-- Display all borrowers -->
+<table border="1">
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone Number</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.userID}}</td>
+            <td>{{this.userName}}</td>
+            <td>{{this.userAddress}}</td>
+            <td>{{this.userPhone}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<!-- Add a new borrower -->
+<h3>Add New Library User</h3>
+<form action="/borrowers/add" method="POST">
+    <label>Name: </label><input type="text" name="userName"> <br>
+    <label>Address: </label><input type="text" name="userAddress"><br>
+    <label>Phone Number: </label><input type="text" name="userPhone"><br>
+    <button type="submit">Add Borrower</button>
+</form>
+
+

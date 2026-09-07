@@ -1,0 +1,69 @@
+<!-- libraries.hbs -->
+{{!-- Citation for the following function:
+Date: 11/21/2024
+Adapted from CS 340: nodejs-starter-app (index.hbs)
+Majority of the code was copied from the sample code given, and modified based on individual project tables. 
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%200%20-%20Setting%20Up%20Node.js --}} 
+
+<h1>Libraries</h1>
+<link rel="stylesheet" href="/styles.css">
+<div class="topnav" id="librariesTopnav">
+  <a href="/"><button type="button">Home</button></a>
+  <a href="/libraries"><button type="button">Libraries</button></a>
+  <a href="/books"><button type="button">Books</button></a>
+  <a href="/borrowers"><button type="button">Borrowers</button></a>
+  <a href="/checkouts"><button type="button">Checkouts</button></a>
+  <a href="/booksBorrowers"><button type="button">Books Borrowers</button></a>
+  <a href="/staff"><button type="button">Staff</button></a>
+</div>
+
+<!-- Display all libraries -->
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.libraryID}}</td>
+            <td>{{this.libraryName}}</td>
+            <td>{{this.libraryAddress}}</td>
+            <td>{{this.contactNumber}}</td>
+            <td>
+                <button type="button" onclick="populateForm('{{this.libraryID}}', '{{this.libraryName}}', '{{this.libraryAddress}}', '{{this.contactNumber}}')">Edit</button>
+                <form action="/libraries/delete/{{this.libraryID}}" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<!-- Add or Update a library -->
+<h3 id="formTitle">Add New Library</h3>
+<form id="libraryForm" action="/libraries/add" method="POST">
+    <input type="hidden" id="libraryID" name="libraryID">
+    <label>Name: </label><input type="text" id="name" name="name"><br>
+    <label>Address: </label><input type="text" id="address" name="address"><br>
+    <label>Contact: </label><input type="text" id="contact" name="contact"><br>
+    <button type="submit" id="formButton">Add Library</button>
+</form>
+
+<script>
+function populateForm(id, name, address, contact) {
+    document.getElementById('libraryID').value = id;
+    document.getElementById('name').value = name;
+    document.getElementById('address').value = address;
+    document.getElementById('contact').value = contact;
+    document.getElementById('formTitle').innerText = 'Update Library';
+    document.getElementById('formButton').innerText = 'Update Library';
+    document.getElementById('libraryForm').action = '/libraries/update/' + id;
+}
+</script>

@@ -1,0 +1,83 @@
+<!-- booksBorrowers.hbs -->
+{{!-- Citation for the following function:
+Date: 11/21/2024
+Adapted from CS 340: nodejs-starter-app (index.hbs)
+Majority of the code was copied from the sample code given, and modified based on individual project tables. 
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%200%20-%20Setting%20Up%20Node.js --}} 
+
+<h1>Books Borrowers</h1>
+<link rel="stylesheet" href="/styles.css">
+<div class="topnav">
+    <a href="/"><button type="button">Home</button></a>
+    <a href="/libraries"><button type="button">Libraries</button></a>
+    <a href="/books"><button type="button">Books</button></a>
+    <a href="/borrowers"><button type="button">Borrowers</button></a>
+    <a href="/checkouts"><button type="button">Checkouts</button></a>
+    <a href="/booksBorrowers"><button type="button">Books Borrowers</button></a>
+    <a href="/staff"><button type="button">Staff</button></a>
+</div>
+
+<!-- Display all book-borrower relationships -->
+<table border="1">
+    <thead>
+        <tr>
+            <th>Book Title</th>
+            <th>Borrower Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.bookTitle}}</td>
+            <td>{{this.userName}}</td>
+            <td>
+                <button type="button" onclick="populateForm(
+                    '{{this.booksBookID}}',
+                    '{{this.borrowersUserID}}'
+                )">Edit</button>
+                <form action="/booksBorrowers/delete" method="POST" style="display:inline;">
+                    <input type="hidden" name="bookID" value="{{this.booksBookID}}">
+                    <input type="hidden" name="borrowerID" value="{{this.borrowersUserID}}">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<!-- Add or Update a book-borrower relationship -->
+<h3 id="formTitle">Add New Book-Borrower Relationship</h3>
+<form id="booksBorrowersForm" action="/booksBorrowers/add" method="POST">
+    <input type="hidden" id="originalBookID" name="originalBookID">
+    <input type="hidden" id="originalBorrowerID" name="originalBorrowerID">
+
+    <label>Book: </label>
+    <select id="bookID" name="bookID">
+        {{#each books}}
+        <option value="{{this.bookID}}">{{this.bookTitle}}</option>
+        {{/each}}
+    </select><br>
+
+    <label>Borrower: </label>
+    <select id="borrowerID" name="borrowerID">
+        {{#each borrowers}}
+        <option value="{{this.userID}}">{{this.userName}}</option>
+        {{/each}}
+    </select><br>
+
+    <button type="submit" id="formButton">Add Relationship</button>
+</form>
+
+<script>
+function populateForm(bookID, borrowerID) {
+    document.getElementById('originalBookID').value = bookID;
+    document.getElementById('originalBorrowerID').value = borrowerID;
+    document.getElementById('bookID').value = bookID;
+    document.getElementById('borrowerID').value = borrowerID;
+    document.getElementById('formTitle').innerText = 'Update Book-Borrower Relationship';
+    document.getElementById('formButton').innerText = 'Update Relationship';
+    document.getElementById('booksBorrowersForm').action = '/booksBorrowers/update';
+}
+</script>

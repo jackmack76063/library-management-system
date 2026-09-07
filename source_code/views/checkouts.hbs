@@ -1,0 +1,109 @@
+<!-- checkouts.hbs -->
+{{!-- Citation for the following function:
+Date: 11/21/2024
+Adapted from CS 340: nodejs-starter-app (index.hbs)
+Majority of the code was copied from the sample code given, and modified based on individual project tables. 
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%200%20-%20Setting%20Up%20Node.js --}} 
+
+<h1>Checkouts</h1>
+<link rel="stylesheet" href="/styles.css">
+<div class="topnav" id="checkoutsTopnav">
+  <a href="/"><button type="button">Home</button></a>
+  <a href="/libraries"><button type="button">Libraries</button></a>
+  <a href="/books"><button type="button">Books</button></a>
+  <a href="/borrowers"><button type="button">Borrowers</button></a>
+  <a href="/checkouts"><button type="button">Checkouts</button></a>
+  <a href="/booksBorrowers"><button type="button">Books Borrowers</button></a>
+  <a href="/staff"><button type="button">Staff</button></a>
+</div>
+
+<!-- Display all checkouts -->
+<table border="1">
+    <thead>
+        <tr>
+            <th>Checkout ID</th>
+            <th>Library Name</th>
+            <th>Borrower Name</th>
+            <th>Staff Name</th>
+            <th>Book Title</th>
+            <th>Due Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.checkoutID}}</td>
+            <td>{{this.libraryName}}</td>
+            <td>{{this.borrowerName}}</td>
+            <td>{{this.staffName}}</td>
+            <td>{{this.bookTitle}}</td>
+            <td>{{this.dueDate}}</td>
+            <td>
+                <button type="button" onclick="populateForm(
+                    '{{this.checkoutID}}',
+                    '{{this.librariesLibraryID}}',
+                    '{{this.borrowersUserID}}',
+                    '{{this.staffStaffID}}',
+                    '{{this.booksBookID}}',
+                    '{{this.dueDate}}')"
+                >Update</button>
+                <form action="/checkouts/delete/{{this.checkoutID}}" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<!-- Add or Update a checkout -->
+<h3 id="formTitle">Add New Checkout</h3>
+<form id="checkoutForm" action="/checkouts/add" method="POST">
+    <input type="hidden" id="checkoutID" name="checkoutID">
+
+    <label>Library: </label>
+    <select id="libraryID" name="libraryID">
+        {{#each libraries}}
+        <option value="{{this.libraryID}}">{{this.libraryName}}</option>
+        {{/each}}
+    </select><br>
+
+    <label>Borrower: </label>
+    <select id="borrowerID" name="borrowerID">
+        {{#each borrowers}}
+        <option value="{{this.userID}}">{{this.userName}}</option>
+        {{/each}}
+    </select><br>
+
+    <label>Staff: </label>
+    <select id="staffID" name="staffID">
+        {{#each staff}}
+        <option value="{{this.staffID}}">{{this.staffName}}</option>
+        {{/each}}
+    </select><br>
+
+    <label>Book: </label>
+    <select id="bookID" name="bookID">
+        {{#each books}}
+        <option value="{{this.bookID}}">{{this.bookTitle}}</option>
+        {{/each}}
+    </select><br>
+
+    <label>Due Date: </label><input type="date" id="dueDate" name="dueDate"><br>
+    <button type="submit" id="formButton">Add Checkout</button>
+</form>
+
+<script>
+function populateForm(id, libraryID, borrowerID, staffID, bookID, dueDate) {
+    document.getElementById('checkoutID').value = id;
+    document.getElementById('libraryID').value = libraryID;
+    document.getElementById('borrowerID').value = borrowerID;
+    document.getElementById('staffID').value = staffID;
+    document.getElementById('bookID').value = bookID;
+    document.getElementById('dueDate').value = dueDate.substring(0,10); 
+    document.getElementById('formTitle').innerText = 'Update Checkout';
+    document.getElementById('formButton').innerText = 'Update Checkout';
+    document.getElementById('checkoutForm').action = '/checkouts/update/' + id;
+}
+</script>

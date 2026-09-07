@@ -1,0 +1,17 @@
+{
+  "name": "librarydb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mackenzie Jackson",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1",
+    "express-handlebars": "^8.0.1",
+    "dotenv": "^16.4.5",
+    "pg": "^8.13.1"
+  }
+}
