@@ -1,30 +1,5 @@
-/*
-{{!-- Citation for the following function:
-Date: 11/21/2024
-Adapted from CS 340: nodejs-starter-app (index.hbs)
-Majority of the code was copied from the sample code given, and modified based on individual project tables. 
-Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%200%20-%20Setting%20Up%20Node.js --}} 
-*/
-// app.js
-
-/*
-    Updated for deployment (Neon + Render):
-    - PORT now reads from process.env.PORT (Render assigns this dynamically;
-      8728 is kept only as a local-development fallback).
-    - The Staff query below now reads results.rows (pg's result shape),
-      not just 'rows' directly (mysql's shape).
-    - Removed the duplicate app.get('/') blocks for Books and Borrowers —
-      Express only ever runs the FIRST matching handler for a route, so
-      those two were dead code left over from earlier development; only
-      the Staff version below was ever actually executing.
-*/
-
-/*
-    SETUP
-*/
-// Express
-var express = require('express');   // We are using the express library for the web server
-var app     = express();            // We need to instantiate an express object to interact with the server in our code
+var express = require('express');   //Using the express library for the web server
+var app     = express();            // Need to instantiate an express object to interact with the server in our code
 PORT        = process.env.PORT || 8728;  // Render assigns PORT automatically in production
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
@@ -84,6 +59,6 @@ app.use('/', booksBorrowersRoutes);
  /*
     LISTENER
 */
-app.listen(PORT, function(){            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
+app.listen(PORT, function(){            //  'listener' which receives incoming requests on the specified PORT.
   console.log('Express started on port ' + PORT + '; press Ctrl-C to terminate.')
 });
