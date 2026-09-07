@@ -1,14 +1,3 @@
- /* Citation for the following function:
-Date: 11/21/2024
-Adapted from CS 340: nodejs-starter-app (app.js)
-Majority of the code was copied from the sample code given, and modified based on individual project tables. 
-Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%200%20-%20Setting%20Up%20Node.js
-
-Updated for Postgres (Neon): pg's callback returns (error, result) where
-result.rows is the array of rows (mysql returned the rows array directly).
-'?' placeholders became '$1, $2, ...' since Postgres uses numbered placeholders.
-*/
-
 const express = require('express');
 const router = express.Router();
 const db = require('../database/db-connector');  
