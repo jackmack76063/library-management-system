@@ -15,6 +15,10 @@ Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/St
     <!-- Pico.css: a lightweight CSS framework that styles plain HTML elements
          (tables, forms, buttons, nav) automatically, with no class names needed. -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <!-- Loaded here once, guaranteed on every page — previously each .hbs
+         file linked this individually, which is how it got accidentally
+         dropped from index.hbs during editing. -->
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <main class="container">
