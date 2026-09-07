@@ -107,7 +107,16 @@ router.post('/staff/delete/:staffID', async function(req, res) {
         res.redirect('/staff');
     } catch (error) {
         console.error(error);
-        res.sendStatus(500);
+        // Postgres error code 23001 = restrict_violation (blocked by an ON DELETE RESTRICT rule)
+        // 23503 = foreign_key_violation (a more general FK error)
+        if (error.code === '23001' || error.code === '23503') {
+            res.status(400).send(
+                '<p>Cannot delete this staff member — they still have checkouts on record. Reassign or delete those checkouts first.</p>' +
+                '<a href="/staff">Back to Staff</a>'
+            );
+        } else {
+            res.sendStatus(500);
+        }
     }
 });
 
