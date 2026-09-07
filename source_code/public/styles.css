@@ -7,12 +7,9 @@ Majority of the code was copied from the sample code given, and modified based o
 Source URL: https://www.w3schools.com/Css/css_align.asp
 */
 
-/* General styles for all pages */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
+/* Note: removed the old body { margin/padding/font-family } rule here —
+   it was overriding Pico.css's nicer default typography and spacing,
+   since this file loads after Pico in the page. */
 
 /* Home page specific styles */
 .home-background {
